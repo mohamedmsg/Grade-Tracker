@@ -14,7 +14,6 @@ public class View implements ActionListener{
 	viewCategories;
 	private JComboBox assignmentCategoriesBox;
 	private JButton[] courses, semesterButtons, assignments, categoryButtons;
-	private JScrollPane buttons;
 	private JLabel usernameLbl, passwordLbl, nameLbl, newUsernameLbl, newPasswordLbl, confirmPasswordLbl, creditsLbl, weightLbl, possibleGradeLbl, 
 	assignmentCategoriesLbl, gradeLbl;
 	private JTextField username, name, newUsername, credits, weightTxt, possibleGrade, grade;
@@ -27,7 +26,8 @@ public class View implements ActionListener{
 	private int[] categoryWeights;
 	private boolean courseBoolean, semesterBoolean, categoryBoolean, assignmentBoolean, secondaryCourseBoolean, setGradeBoolean, secondarySemesterBoolean;
 
-
+//TODO: Clean up code
+	
 	public View(){
 		//JFrames
 		this.mainWindow = new JFrame();
@@ -176,7 +176,6 @@ public class View implements ActionListener{
 		this.assignmentCategoriesBox = new JComboBox();
 		this.categoryWeights = new int[1];
 		this.categoryWeights[0] = 100;
-		this.buttons = new JScrollPane();
 	}
 
 	/*
@@ -332,7 +331,6 @@ public class View implements ActionListener{
 			panel.setOpaque(false);
 			panel.setLayout(new GridLayout(semesters.size(), 1));
 			
-			int yBtnPosition = 0;
 			for(int i = 0; i < semesterButtons.length; i ++){
 				semesterButtons[i] = new JButton(semesters.get(i).getName() + " GPA: " + semesters.get(i).getGPA());
 				semesterButtons[i].setIcon(buttonIcon);
@@ -342,11 +340,9 @@ public class View implements ActionListener{
 				semesterButtons[i].setFont(new Font("Serif", Font.PLAIN, 14));
 				semesterButtons[i].setForeground(new Color(51, 204, 255));
 				semesterButtons[i].setBorder(null);
-				semesterButtons[i].setBounds(0, yBtnPosition, (int)semesterButtons[i].getPreferredSize().getWidth(), (int)semesterButtons[i].getPreferredSize().getHeight());
+				semesterButtons[i].setBounds(12, semesterYBtnPosition, (int)semesterButtons[i].getPreferredSize().getWidth(), (int)semesterButtons[i].getPreferredSize().getHeight());
 				semesterButtons[i].addActionListener(this);
-				yBtnPosition += buttonIcon.getIconHeight() - 1;
 				courseBackground.add(semesterButtons[i]);
-				buttons.revalidate();
 				semesterYBtnPosition += (int)(buttonIcon.getIconHeight() - 1);
 			}
 			addSemesterBtn.setIcon(buttonIcon);
@@ -355,10 +351,8 @@ public class View implements ActionListener{
 			addSemesterBtn.setVerticalTextPosition(addSemesterBtn.CENTER);
 			addSemesterBtn.setForeground(new Color(51, 204, 255));
 			addSemesterBtn.setBorder(null);
-			addSemesterBtn.setBounds(0, yBtnPosition, (int)addSemesterBtn.getPreferredSize().getWidth(), (int)addSemesterBtn.getPreferredSize().getHeight());
-			panel.add(addSemesterBtn);
-			buttons.setViewportView(panel);
-//			courseBackground.add(buttons);
+			addSemesterBtn.setBounds(12, semesterYBtnPosition, (int)addSemesterBtn.getPreferredSize().getWidth(), (int)addSemesterBtn.getPreferredSize().getHeight());
+			courseBackground.add(addSemesterBtn);
 
 			secondWindow.add(courseBackground);
 			secondWindow.setVisible(true);
